@@ -5,6 +5,7 @@ import Comment from './comment';
 import {postComment} from '../server'
 import {unlikeFeedItem} from '../server'
 import {likeFeedItem} from '../server'
+import {likeComment} from '../server'
 
 export default class FeedItem extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class FeedItem extends React.Component {
     // The FeedItem's initial state is what the Feed passed to us.
     this.state = props.data;
   }
+
   handleCommentPost(commentText) {
     // Post a comment as user ID 4, which is our mock user!
     postComment(this.state._id, 4, commentText, (updatedFeedItem) => {
@@ -24,6 +26,7 @@ export default class FeedItem extends React.Component {
 * Triggered when the user clicks on the 'like'
 * or 'unlike' button.
 */
+
   handleLikeClick(clickEvent) {
     // Stop the event from propagating up the DOM
     // tree, since we handle it here. Also prevents
@@ -51,6 +54,7 @@ export default class FeedItem extends React.Component {
       }
     }
   }
+
 /**
 * Returns 'true' if the user liked the item.
 * Returns 'false' if the user has not liked the item.
@@ -146,7 +150,8 @@ return liked;
                     return (
                       <Comment key={i}
                         author={comment.author}
-                        postDate={comment.postDate}>
+                        postDate={comment.postDate}
+                        likeCounter={comment.likeCounter}>
                       {comment.contents}
                     </Comment>
                   );
